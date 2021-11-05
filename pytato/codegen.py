@@ -605,11 +605,7 @@ class NamesValidityChecker(CachedWalkMapper):
         super().__init__()
 
     def post_visit(self, expr: Any) -> None:
-        if isinstance(expr, InputArgumentBase):
-            if expr.name is None:
-                # Name to be automatically assigned
-                return
-
+        if isinstance(expr, (Placeholder, SizeParam)):
             try:
                 ary = self.name_to_input[expr.name]
             except KeyError:

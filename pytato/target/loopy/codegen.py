@@ -898,7 +898,7 @@ def generate_loopy(result: Union[Array, DictOfNamedArrays, Dict[str, Array]],
     state.var_name_gen.add_names({input_expr.name
             for name in compute_order
             for input_expr in ing(outputs[name].expr)
-            if input_expr.name is not None})
+            if isinstance(input_expr, (Placeholder, SizeParam))})
 
     state.var_name_gen.add_names(outputs)
 
